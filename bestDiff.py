@@ -147,7 +147,7 @@ def orbFeatures(img1,img2):
     img2 = img.copy()
     
     #for marker in kp1:
-    #	img2 = cv2.drawMarker(img2, tuple(int(i) for i in marker.pt), color=(0, 255, 0))
+    #    img2 = cv2.drawMarker(img2, tuple(int(i) for i in marker.pt), color=(0, 255, 0))
     #plt.imshow(img2),plt.show()
     
     # create BFMatcher object
@@ -227,6 +227,17 @@ img2 = imags[1]
 compare_images(img1,img2);
 
 cv2.destroyAllWindows()
+
+
+
+
+
+
+
+
+
+
+
 
 
 
