@@ -6,7 +6,7 @@ from scipy.misc import imsave
 from scipy.ndimage import imread
 import numpy as np
 import cv2
-
+import os.path
 ##
 # Globals
 ##
@@ -148,26 +148,24 @@ def sift_sim(path_a, path_b):
 
 
 if __name__ == '__main__':
-  img_a = '02_L.bmp'
-  img_b = '08_L.bmp'
-  # get the similarity values
-  structural_sim = structural_sim(img_a, img_b)
-  pixel_sim = pixel_sim(img_a, img_b)
-  sift_sim = sift_sim(img_a, img_b)
-  emd = earth_movers_distance(img_a, img_b)
-  print(structural_sim, pixel_sim, sift_sim, emd)
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
+  img_a = '001_1.bmp'
+  img_b = '001_2.bmp'
+  filenames = sorted(os.listdir(root_dir))  # List all the items in root_dir
+  for i in filenames:
+      print(i)
+      if i =='.DS_Store':          
+          continue
+      # get the similarity values
+      structural_sim = structural_sim(img_a,str(i))
+      pixel_sim = pixel_sim(img_a,i)
+      sift_sim = sift_sim(img_a,i)
+      emd = earth_movers_distance(img_a,i)
+      print(structural_sim, pixel_sim, sift_sim, emd)
+      
+      
+      
+      
+      
+      
+      
+      

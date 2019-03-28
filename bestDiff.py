@@ -42,12 +42,12 @@ def getIris(img1,img,val):
     radius = 0
     
     for i in circles[0,:]:
-        i[2]=i[2]
+        i[2]=i[2] + 4
         # Draw on mask
         cv2.circle(mask,(i[0],i[1]),i[2],(255,255,255),thickness=-1)
         xcentre = i[0]
         ycentre = i[1]
-        radius = i[2]
+        radius = i[2] + 4
     # Copy that image using that mask
     masked_data = cv2.bitwise_and(img1, img1, mask = mask)
     # Apply Threshold
@@ -110,10 +110,13 @@ def loadImages(path):
 
     imagesList = listdir(path)
     loadedImages = []
+    k = 0
     for image in imagesList:
         img = Image.open(path + image)
         loadedImages.append(img)
-
+        k = k+1;
+        if(k == 5):
+            break;
     return loadedImages
 
 path = "IITDatabase/"
@@ -126,34 +129,42 @@ radiuses = []
 xpoints = []
 ypoints = []
 # your images in an array
-for i in range(1,224):
+for i in range(1,140):
     x = "{0:0=3d}".format(i)+'/'
     path1 = path + str(x)
     list.append(inputimags,loadImages(path1))
 
-
-k = 0
+k = 0;idx = 0
 for i in inputimags:
     for j in i:
         img = np.asarray(j)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        a,r,x,y = getIris(img,gray,148)
-        plt.imshow(a),plt.show()
-        print(k)
+        a,r,x,y = getIris(img,gray,130)
+        k = k%5
+        if(k == 0):
+            idx = idx+1;
+        x1 = "{0:0=3d}".format(idx)
         k = k+1;
+        name = 'Normalized/' + str(x1)+'_'+str(k) + '.bmp'
+        print(idx)
+        status = cv2.imwrite(name,a)
+        print(status)
         list.append(imags,a);
         list.append(radiuses,r);
         list.append(xpoints,x);
         list.append(ypoints,y);
-
+        
+for i in imags:
+    plt.imshow(i),plt.show()
 #print(xpoints,ypoints)
 #print(radiuses)
 #seeImages(imags)
 
 #normalizing the images
+    
 k = 0;idx = 0
-for i in range(0,len(inputimags)):
-    k = k%10;
+for i in range(0,len(imags)):
+    k = k%5;
     if(k == 0):
         idx = idx+1;
     k = k+1;
@@ -165,6 +176,7 @@ for i in range(0,len(inputimags)):
     print(name)
     status = cv2.imwrite(name,normImg)
     print(status)
+    
 #seeImagesviaName(ImageName)
 #seeImages(imags)
 #Remove orb features
