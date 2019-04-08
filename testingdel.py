@@ -176,6 +176,7 @@ for i in files:
         continue
     shifts = []
     structsims = []
+    emds = []
     ##delete below one ::::::: 
     img_a = folder + '/'+'111_1.bmp'
     for filename in files:
@@ -189,16 +190,14 @@ for i in files:
         l,h = x.size
         if (l < 100 or h < 100) :      ## To be handled
             print(l)
-            list.append(structsims,0)
+            #list.append(structsims,0)
             list.append(shifts,0)
+            list.append(emds,0)
             continue
-        #print('img_a is ' + img_a)
 
         #----------------- Just tryign the histogram one-------------
         emd = earth_movers_distance(img_a, img_b)
-
         #structural_sim_1 = structural_sim(img_a,img_b)
-        #list.append(structsims,structural_sim_1)
     
         #pixel_sim = pixel_sim(img_a,img_b)
         #sift_sim = sift_sim(img_a,img_b)
@@ -206,9 +205,12 @@ for i in files:
     
         #emd = earth_movers_distance(img_a,img_b)
         #print(structural_sim, pixel_sim, sift_sim, emd)
-        print('structural_sim is '+str(structural_sim_1))
+        ### Will remove comment later  ---print('structural_sim is '+str(structural_sim_1))
         print('sift is __ :' + str(sift_sim_1))
         list.append(shifts,sift_sim_1)
+        list.append(emds,emd)
+        #list.append(structsims,structural_sim_1)
+        
     list.append(realshifts,shifts)
     list.append(realstructsims,structsims)
 

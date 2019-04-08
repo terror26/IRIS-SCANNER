@@ -129,7 +129,7 @@ radiuses = []
 xpoints = []
 ypoints = []
 # your images in an array
-for i in range(1,140):
+for i in range(1,223):
     x = "{0:0=3d}".format(i)+'/'
     path1 = path + str(x)
     list.append(inputimags,loadImages(path1))
@@ -160,8 +160,7 @@ for i in imags:
 #print(radiuses)
 #seeImages(imags)
 
-#normalizing the images
-    
+#normalizing the images .............................Not required
 k = 0;idx = 0
 for i in range(0,len(imags)):
     k = k%5;
