@@ -1,3 +1,3 @@
 # IRIS Scanner
 
-Iris Biometric (Computer vision cum machine learning)
+Iris Biometric (Using Computer Vision and Machine Learning)
